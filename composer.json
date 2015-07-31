@@ -1,0 +1,23 @@
+{
+	"name": "platron/signature",
+	"description": "Protocol signature package",
+	"keywords": [
+		"platron",
+		"signature",
+		"protocol"
+	],
+	"homepage": "http://platron.ru",
+  	"type": "library",
+	"license": "BSD-3-Clause",
+	"support": {
+		"issues": "https://github.com/platron/signature/issues?state=open",
+		"source": "https://github.com/platron/signature"
+	},
+	"minimum-stability": "stable",
+	"require": {
+		"php": ">=5.3.1"
+	},
+	"autoload": {
+	  "psr-4": {"platron\\": ""}
+	}
+}
