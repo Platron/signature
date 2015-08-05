@@ -17,7 +17,7 @@
 	"require": {
 		"php": ">=5.3.1"
 	},
-+	"autoload": {
-+	  "psr-4": {"platron\\signature\\": ""}
-+	}
+	"autoload": {
+	  "psr-4": {"platron\\signature\\": ""}
+	}
 }
