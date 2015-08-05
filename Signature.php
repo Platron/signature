@@ -1,6 +1,6 @@
 <?php
 
-namespace platron\signature;
+namespace platron;
 
 use SimpleXMLElement;
 
