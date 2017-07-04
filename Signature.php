@@ -93,33 +93,36 @@ class Signature
         return join(';', $arrParams);
     }
 
-    private static function makeFlatParamsArray($arrParams, $parent_name = '')
-    {
-        $arrFlatParams = [];
-        $i = 0;
-        foreach ($arrParams as $key => $val) {
-
-            $i++;
-            if ('pg_sig' === $key) {
-                continue;
+	private static function makeFlatParamsArray ( $arrParams, $parent_name = '' )
+	{
+		$arrFlatParams = array();
+		$i = 0;
+		foreach ( $arrParams as $key => $val ) {
+			$i++;
+			if ( 'pg_sig' === $key)
+				continue;
+				
+			/**
+			 * Имя делаем вида tag001subtag001
+			 * Чтобы можно было потом нормально отсортировать и вложенные узлы не запутались при сортировке
+			 */
+            if(is_int($key)){
+                $name = substr($parent_name, 0, strlen($parent_name) - 3) . sprintf('%03d', $i);
             }
-
-            /**
-             * Имя делаем вида tag001subtag001
-             * Чтобы можно было потом нормально отсортировать и вложенные узлы не запутались при сортировке
-             */
-            $name = $parent_name . $key . sprintf('%03d', $i);
-
-            if (is_array($val)) {
-                $arrFlatParams = array_merge($arrFlatParams, self::makeFlatParamsArray($val, $name));
-                continue;
+            else {
+                $name = $parent_name . $key . sprintf('%03d', $i);
             }
+            
+			if (is_array($val) ) {
+				$arrFlatParams = array_merge($arrFlatParams, self::makeFlatParamsArray($val, $name));
+				continue;
+			}
 
-            $arrFlatParams += [$name => (string)$val];
-        }
+			$arrFlatParams += array($name => (string)$val);
+		}
 
-        return $arrFlatParams;
-    }
+		return $arrFlatParams;
+	}
 
     /**
      * make the signature for XML
